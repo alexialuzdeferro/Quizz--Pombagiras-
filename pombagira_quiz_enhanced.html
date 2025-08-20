@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oráculo Sagrado das Pombagiras 🔮</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Cinzel', serif;
+      background: radial-gradient(ellipse at center, #2d0000 0%, #1a0000 50%, #000000 100%);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Canvas de partículas */
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Container principal */
+    .container {
+      position: relative;
+      z-index: 10;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Título principal */
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      color: #ff6b35;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      text-shadow: 0 0 20px #ff6b35, 2px 2px 4px #000;
+      margin: 30px 0;
+      animation: titleGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      0% { text-shadow: 0 0 20px #ff6b35, 2px 2px 4px #000; }
+      100% { text-shadow: 0 0 30px #ff6b35, 0 0 40px #ff1744, 2px 2px 4px #000; }
+    }
+
+    /* Altar com velas */
+    .altar {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin: 30px 0;
+      position: relative;
+    }
+
+    .vela {
+      width: 20px;
+      height: 60px;
+      margin: 0 8px;
+      background: linear-gradient(to bottom, #8b0000 0%, #ff4444 50%, #8b0000 100%);
+      border-radius: 10px 10px 3px 3px;
+      position: relative;
+      animation: candleFlicker 2s infinite alternate;
+      box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+    }
+
+    .vela::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 8px;
+      background: #2c1810;
+      border-radius: 50%;
+    }
+
+    .vela::after {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 15px;
+      background: radial-gradient(ellipse at center, #ffeb3b 0%, #ff9800 40%, #ff5722 70%, transparent 100%);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      animation: flame 1.5s infinite ease-in-out alternate;
+    }
+
+    @keyframes candleFlicker {
+      0% { transform: translateY(0) rotate(-0.5deg); }
+      100% { transform: translateY(-2px) rotate(0.5deg); }
+    }
+
+    @keyframes flame {
+      0% { 
+        transform: translateX(-50%) rotate(-2deg) scale(1);
+        opacity: 0.9;
+      }
+      100% { 
+        transform: translateX(-50%) rotate(2deg) scale(1.1);
+        opacity: 1;
+      }
+    }
+
+    /* Área do quiz */
+    .quiz-area {
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid #ff6b35;
+      border-radius: 15px;
+      padding: 30px;
+      margin: 30px 0;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
+    }
+
+    .question {
+      font-size: 1.4rem;
+      margin-bottom: 25px;
+      color: #ffdd44;
+      text-shadow: 1px 1px 3px #000;
+      line-height: 1.4;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .option {
+      padding: 15px 25px;
+      background: linear-gradient(45deg, #8b0000, #ff1744, #8b0000);
+      background-size: 200% 200%;
+      border: 2px solid #ff6b35;
+      border-radius: 25px;
+      color: white;
+      font-size: 1.1rem;
+      font-family: 'Cinzel', serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      animation: optionShine 3s infinite;
+    }
+
+    .option::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .option:hover::before {
+      left: 100%;
+    }
+
+    .option:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.5);
+      background-position: 100% 0;
+    }
+
+    @keyframes optionShine {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* Progresso */
+    .progress-container {
+      margin: 20px 0;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      padding: 5px;
+    }
+
+    .progress-bar {
+      height: 10px;
+      background: linear-gradient(90deg, #ff6b35, #ff1744);
+      border-radius: 5px;
+      transition: width 0.5s ease;
+      box-shadow: 0 0 10px rgba(255, 107, 53, 0.8);
+    }
+
+    .progress-text {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #ffdd44;
+    }
+
+    /* Botão final */
+    .reveal-btn {
+      padding: 20px 40px;
+      font-size: 1.3rem;
+      background: linear-gradient(45deg, #8b0000, #ff1744);
+      color: white;
+      border: 3px solid #ff6b35;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin: 30px 0;
+      display: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
+    }
+
+    .reveal-btn:hover {
+      transform: scale(1.1) rotate(1deg);
+      box-shadow: 0 0 40px rgba(255, 107, 53, 0.8);
+      background: linear-gradient(45deg, #ff1744, #8b0000);
+    }
+
+    /* Resultado */
+    .result-area {
+      margin-top: 30px;
+      display: none;
+    }
+
+    .pombagira-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.5rem;
+      color: #ffdd00;
+      text-shadow: 0 0 20px #ffdd00;
+      margin: 20px 0;
+      animation: resultGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes resultGlow {
+      0% { text-shadow: 0 0 20px #ffdd00; }
+      100% { text-shadow: 0 0 30px #ffdd00, 0 0 40px #ff6b35; }
+    }
+
+    .pombagira-image {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      border: 5px solid #ff6b35;
+      box-shadow: 0 0 40px rgba(255, 107, 53, 0.8);
+      animation: imageReveal 1s ease forwards;
+      margin: 20px 0;
+      object-fit: cover;
+    }
+
+    @keyframes imageReveal {
+      0% { 
+        transform: scale(0) rotate(180deg);
+        opacity: 0;
+      }
+      100% { 
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    .pombagira-description {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      border-left: 5px solid #ff6b35;
+    }
+
+    .restart-btn {
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      background: linear-gradient(45deg, #4a4a4a, #666);
+      color: white;
+      border: 2px solid #888;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Cinzel', serif;
+      margin-top: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .restart-btn:hover {
+      background: linear-gradient(45deg, #666, #4a4a4a);
+      transform: scale(1.05);
+    }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+      .container { padding: 15px; }
+      .quiz-area { padding: 20px; }
+      .question { font-size: 1.2rem; }
+      .option { padding: 12px 20px; font-size: 1rem; }
+      .vela { width: 15px; height: 45px; }
+      .pombagira-image { width: 200px; height: 200px; }
+    }
+
+    /* Animação de entrada */
+    .fade-in {
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+  
+  <div class="container">
+    <div class="altar">
+      <div class="vela"></div>
+      <div class="vela"></div>
+      <div class="vela"></div>
+      <div class="vela"></div>
+      <div class="vela"></div>
+    </div>
+
+    <h1>🔥 Oráculo Sagrado das Pombagiras 🔮</h1>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+      <div class="progress-text" id="progressText">Questão 0 de 12</div>
+    </div>
+
+    <div class="quiz-area" id="quizArea">
+      <div class="question" id="question">Preparando o oráculo...</div>
+      <div class="options" id="options"></div>
+    </div>
+
+    <button class="reveal-btn" id="revealBtn" onclick="revealPombagira()">
+      🔮 Revelar Minha Pombagira 🔮
+    </button>
+
+    <div class="result-area" id="resultArea">
+      <div class="pombagira-name" id="pombagiraName"></div>
+      <img class="pombagira-image" id="pombagiraImage" src="" alt="Pombagira">
+      <div class="pombagira-description" id="pombagiraDescription"></div>
+      <button class="restart-btn" onclick="restartQuiz()">🔄 Consultar Novamente</button>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        q: "Qual é o significado da saudação 'Laroyê Exu'?",
+        options: [
+          "Salve! Abram-se os caminhos!",
+          "Boa sorte em todos os sentidos",
+          "Proteção contra o mal"
+        ],
+        answer: 0
+      },
+      {
+        q: "As Pombagiras são entidades espirituais ligadas principalmente a:",
+        options: [
+          "Mistérios do amor, sedução e justiça feminina",
+          "Somente rituais de guerra",
+          "Apenas cura e medicina"
+        ],
+        answer: 0
+      },
+      {
+        q: "Qual cor é mais tradicionalmente associada às Pombagiras?",
+        options: [
+          "Azul marinho",
+          "Vermelho intenso",
+          "Verde esmeralda"
+        ],
+        answer: 1
+      },
+      {
+        q: "Em qual local as Pombagiras manifestam maior força?",
+        options: [
+          "Encruzilhadas e cruzamentos",
+          "Topos de montanhas",
+          "Margens de rios"
+        ],
+        answer: 0
+      },
+      {
+        q: "Qual elemento é símbolo de poder das Pombagiras?",
+        options: [
+          "Espadas douradas",
+          "Tridentes de ferro",
+          "Rosas vermelhas"
+        ],
+        answer: 2
+      },
+      {
+        q: "O que é fundamental no relacionamento com as Pombagiras?",
+        options: [
+          "Respeito, oferendas apropriadas e sinceridade",
+          "Apenas velas coloridas",
+          "Somente músicas específicas"
+        ],
+        answer: 0
+      },
+      {
+        q: "Maria Padilha é conhecida como:",
+        options: [
+          "A Rainha das Encruzilhadas",
+          "A Guardiã dos Mares",
+          "A Protetora das Florestas"
+        ],
+        answer: 0
+      },
+      {
+        q: "As Pombagiras podem auxiliar principalmente em questões de:",
+        options: [
+          "Amor, relacionamentos e autoestima feminina",
+          "Somente negócios financeiros",
+          "Apenas saúde física"
+        ],
+        answer: 0
+      },
+      {
+        q: "Qual bebida é tradicionalmente oferecida às Pombagiras?",
+        options: [
+          "Água benta",
+          "Champagne ou licor",
+          "Chá de ervas"
+        ],
+        answer: 1
+      },
+      {
+        q: "A Calunga representa:",
+        options: [
+          "O reino dos mistérios e da justiça espiritual",
+          "Apenas alegria e festa",
+          "Somente coragem física"
+        ],
+        answer: 0
+      },
+      {
+        q: "Qual dia da semana é mais propício para rituais com Pombagiras?",
+        options: [
+          "Domingo",
+          "Quarta-feira",
+          "Segunda-feira"
+        ],
+        answer: 2
+      },
+      {
+        q: "O perfume tradicionalmente associado às Pombagiras é:",
+        options: [
+          "Lavanda suave",
+          "Rosas vermelhas intensas",
+          "Jasmim delicado"
+        ],
+        answer: 1
+      }
+    ];
+
+    const pombagiras = [
+      {
+        name: "Pombagira Maria Padilha",
+        description: "A Rainha das Encruzilhadas, senhora do amor e da sedução. Ela governa os mistérios femininos e ajuda em questões do coração, trazendo paixão e removendo obstáculos amorosos. Sua força reside na sabedoria feminina ancestral.",
+        traits: "Elegante, poderosa, sedutora e justa. Protege as mulheres e ensina sobre o poder feminino.",
+        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250' viewBox='0 0 250 250'%3E%3Cdefs%3E%3CradialGradient id='bg' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23ff1744'/%3E%3Cstop offset='100%25' stop-color='%23000'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='125' cy='125' r='125' fill='url(%23bg)'/%3E%3Ctext x='125' y='135' text-anchor='middle' fill='%23ffdd00' font-size='24' font-family='serif'%3E👑 Maria Padilha 👑%3C/text%3E%3C/svg%3E"
+      },
+      {
+        name: "Pombagira Cigana",
+        description: "A cigana dos caminhos, senhora da liberdade e da intuição. Ela traz sorte nos negócios, revela segredos através da cartomancia e protege os viajantes. Sua energia é livre como o vento.",
+        traits: "Livre, intuitiva, misteriosa e protetora. Especialista em revelações e caminhos.",
+        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250' viewBox='0 0 250 250'%3E%3Cdefs%3E%3CradialGradient id='bg2' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23ff6b35'/%3E%3Cstop offset='100%25' stop-color='%23000'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='125' cy='125' r='125' fill='url(%23bg2)'/%3E%3Ctext x='125' y='135' text-anchor='middle' fill='%23ffdd00' font-size='20' font-family='serif'%3E🔮 Pombagira Cigana 🔮%3C/text%3E%3C/svg%3E"
+      },
+      {
+        name: "Pombagira das Almas",
+        description: "A guardiã das almas perdidas, senhora da justiça espiritual. Ela trabalha com energias profundas de transformação, ajudando na evolução espiritual e na resolução de questões cármicas antigas.",
+        traits: "Profunda, transformadora, justa e espiritual. Trabalha com energias de renovação.",
+        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250' viewBox='0 0 250 250'%3E%3Cdefs%3E%3CradialGradient id='bg3' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%238b0000'/%3E%3Cstop offset='100%25' stop-color='%23000'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='125' cy='125' r='125' fill='url(%23bg3)'/%3E%3Ctext x='125' y='135' text-anchor='middle' fill='%23ffdd00' font-size='18' font-family='serif'%3E✨ Pombagira das Almas ✨%3C/text%3E%3C/svg%3E"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let userAnswers = [];
+
+    // Sistema de partículas melhorado
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let canvasWidth = canvas.width = window.innerWidth;
+    let canvasHeight = canvas.height = window.innerHeight;
+    const particles = [];
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvasWidth;
+        this.y = Math.random() * canvasHeight;
+        this.radius = Math.random() * 3 + 1;
+        this.speedY = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.alpha = Math.random() * 0.6 + 0.2;
+        this.color = Math.random() > 0.5 ? 'rgba(255,107,53,' : 'rgba(255,23,68,';
+      }
+
+      update() {
+        this.y -= this.speedY;
+        this.x += this.speedX;
+        
+        if (this.y < -10) {
+          this.y = canvasHeight + 10;
+          this.x = Math.random() * canvasWidth;
+        }
+      }
+
+      draw() {
+        ctx.globalAlpha = this.alpha;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color + this.alpha + ')';
+        ctx.fill();
+      }
+    }
+
+    // Criar partículas
+    for (let i = 0; i < 100; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+
+    function createCelebrationParticles() {
+      for (let i = 0; i < 30; i++) {
+        setTimeout(() => {
+          const celebrationParticle = {
+            x: Math.random() * canvasWidth,
+            y: canvasHeight,
+            radius: Math.random() * 6 + 3,
+            speedY: Math.random() * 4 + 2,
+            speedX: (Math.random() - 0.5) * 4,
+            alpha: 1,
+            color: `hsl(${Math.random() * 60 + 10}, 100%, 60%)`,
+            life: 100
+          };
+          particles.push(celebrationParticle);
+          
+          const interval = setInterval(() => {
+            celebrationParticle.life--;
+            celebrationParticle.alpha = celebrationParticle.life / 100;
+            if (celebrationParticle.life <= 0) {
+              particles.splice(particles.indexOf(celebrationParticle), 1);
+              clearInterval(interval);
+            }
+          }, 50);
+        }, i * 100);
+      }
+    }
+
+    animateParticles();
+
+    function loadQuestion() {
+      if (currentQuestion >= questions.length) {
+        showFinalButton();
+        return;
+      }
+
+      const question = questions[currentQuestion];
+      const progress = ((currentQuestion) / questions.length) * 100;
+      
+      document.getElementById('progressBar').style.width = progress + '%';
+      document.getElementById('progressText').textContent = `Questão ${currentQuestion + 1} de ${questions.length}`;
+      
+      document.getElementById('question').textContent = question.q;
+      
+      const optionsContainer = document.getElementById('options');
+      optionsContainer.innerHTML = '';
+      
+      question.options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.className = 'option fade-in';
+        button.textContent = option;
+        button.style.animationDelay = `${index * 0.1}s`;
+        button.onclick = () => selectAnswer(index);
+        optionsContainer.appendChild(button);
+      });
+    }
+
+    function selectAnswer(selectedIndex) {
+      userAnswers.push(selectedIndex);
+      if (selectedIndex === questions[currentQuestion].answer) {
+        score++;
+      }
+      
+      // Efeito visual na seleção
+      const options = document.querySelectorAll('.option');
+      options[selectedIndex].style.background = 'linear-gradient(45deg, #4caf50, #8bc34a)';
+      options[selectedIndex].style.transform = 'scale(1.1)';
+      
+      setTimeout(() => {
+        currentQuestion++;
+        loadQuestion();
+      }, 800);
+    }
+
+    function showFinalButton() {
+      document.getElementById('progressBar').style.width = '100%';
+      document.getElementById('progressText').textContent = 'Quiz Concluído!';
+      
+      document.getElementById('question').innerHTML = `
+        <div style="font-size: 1.8rem; color: #ffdd44; margin-bottom: 20px;">
+          ✨ Consulta Finalizada ✨
+        </div>
+        <div style="font-size: 1.2rem;">
+          Você acertou ${score} de ${questions.length} questões.<br>
+          O oráculo está pronto para revelar sua Pombagira guia!
+        </div>
+      `;
+      document.getElementById('options').innerHTML = '';
+      document.getElementById('revealBtn').style.display = 'inline-block';
+    }
+
+    function revealPombagira() {
+      let index;
+      if (score <= 4) {
+        index = 2; // Pombagira das Almas
+      } else if (score <= 8) {
+        index = 1; // Pombagira Cigana  
+      } else {
+        index = 0; // Maria Padilha
+      }
+
+      const selectedPombagira = pombagiras[index];
+      
+      document.getElementById('quizArea').style.display = 'none';
+      document.getElementById('revealBtn').style.display = 'none';
+      
+      const resultArea = document.getElementById('resultArea');
+      document.getElementById('pombagiraName').textContent = selectedPombagira.name;
+      document.getElementById('pombagiraImage').src = selectedPombagira.image;
+      document.getElementById('pombagiraDescription').innerHTML = `
+        <h3 style="color: #ff6b35; margin-bottom: 15px;">🌹 Sua Pombagira Guia 🌹</h3>
+        <p style="margin-bottom: 15px;"><strong>Descrição:</strong> ${selectedPombagira.description}</p>
+        <p><strong>Características:</strong> ${selectedPombagira.traits}</p>
+      `;
+      
+      resultArea.style.display = 'block';
+      createCelebrationParticles();
+      
+      // Som de revelação (simulado com vibração se disponível)
+      if (navigator.vibrate) {
+        navigator.vibrate([200, 100, 200]);
+      }
+    }
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      score = 0;
+      userAnswers = [];
+      
+      document.getElementById('quizArea').style.display = 'block';
+      document.getElementById('resultArea').style.display = 'none';
+      document.getElementById('revealBtn').style.display = 'none';
+      
+      loadQuestion();
+    }
+
+    // Redimensionar canvas
+    window.addEventListener('resize', () => {
+      canvasWidth = canvas.width = window.innerWidth;
+      canvasHeight = canvas.height = window.innerHeight;
+    });
+
+    // Iniciar quiz
+    setTimeout(() => {
+      loadQuestion();
+    }, 1000);
+  </script>
+</body>
+</html>
