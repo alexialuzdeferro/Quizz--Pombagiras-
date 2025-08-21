@@ -1,6 +1,6 @@
 # Oráculo Sagrado das Pombagiras
 
-![Imagem de Capa do App](https://link-para-uma-imagem-sua.com/imagem.png )
+![undefined_An_Artgerm-style_hyp.png](https://link-para-uma-imagem-sua.com/imagem.png )
 
 > ["Um aplicativo que celebra a força e a sabedoria das Pombagiras."]
 
