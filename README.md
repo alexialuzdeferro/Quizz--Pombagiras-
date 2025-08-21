@@ -1,9 +1,9 @@
-# Oráculo Sagrado das Pombagiras
+ Oráculo Sagrado das Pombagiras
 
 ![Descrição da imagem](https://raw.githubusercontent.com/alexialuzdeferro/Quizz--Pombagiras-/refs/heads/main/assets/undefined_An_Artgerm-style_hyp.png )
 
 
-> ["Um aplicativo que celebra a força e a sabedoria das Pombagiras."]
+> ["Descubra qual e sua Pombagira."]
 
 ---
 
