@@ -24,15 +24,14 @@ Este projeto é [descreva aqui o objetivo do seu aplicativo com um pouco mais de
 
 Você pode ver o aplicativo funcionando ao vivo clicando no link abaixo:
 
-**[Clique aqui para acessar o aplicativo!] https://alexialuzdeferro.github.io/Quizz--Pombagiras-/
+https://alexialuzdeferro.github.io/Quizz--Pombagiras-/
 
 ---
 
 ## 👩‍💻 Desenvolvido por
 
 **Alexia Tsan**
-
-*   **TikTok:** [@seu-usuario-tiktok](https://tiktok.com/@seu-usuario-tiktok )
+https://www.tiktok.com/@almasdepombagira?_t=ZM-8z36g5TDUcI&_r=1
 *   **GitHub:** [@seu-usuario-github](https://github.com/seu-usuario-github )
 
 *Feito com Axé e Tecnologia! 🌹*
