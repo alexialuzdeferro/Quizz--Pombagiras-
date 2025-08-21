@@ -1,13 +1,13 @@
-## 🙏 Oráculo Sagrado das Pombagiras
+# 🙏 Oráculo Sagrado das Pombagiras
 
 ![Descrição da imagem](https://raw.githubusercontent.com/alexialuzdeferro/Quizz--Pombagiras-/refs/heads/main/assets/undefined_An_Artgerm-style_hyp.png )
 
 
-### 💃 "Descubra qual e sua Pombagira."
+## 💃 "Descubra qual e sua Pombagira."
 
 
 
-## 📖 Sobre o Projeto
+# 📖 Sobre o Projeto
 
 Este projeto é bem simples, respondendo algumas perguntas específicas sobre o assunto você consegue conhecer quem é sua Pombagira. Foi e ainda está sendo um exercício de aprendizado. É uma ferramenta ainda em desenvolvimento e só a pontinha do iceberg. Sim, e uma homenagem as minhas mães espirituais, as Pombagiras. Ele foi desenvolvido com muito carinho e dedicação, utilizando as seguintes tecnologias:
 
