@@ -31,10 +31,16 @@ https://alexialuzdeferro.github.io/Quizz--Pombagiras-/
 
 # 👩‍💻 Desenvolvido por
 
-*Alexia Tsan*
+# Alexia Tsan
+
+---
 
 **TikTok:** 
+
 https://www.tiktok.com/@almasdepombagira?_t=ZM-8z36g5TDUcI&_r=1
-**GitHub:** [@seu-usuario-github](https://github.com/seu-usuario-github )
+
+**Instagram:** [@seu-usuario-github]
+
+(https://www.instagram.com/almasdepombagira?igsh=Y3VocnA2aDQxYjlw )
 
 *Feito com Axé e Tecnologia! 🌹*
