@@ -24,7 +24,7 @@ Este projeto é [descreva aqui o objetivo do seu aplicativo com um pouco mais de
 
 Você pode ver o aplicativo funcionando ao vivo clicando no link abaixo:
 
-**[Clique aqui para acessar o aplicativo!](https://seu-nome-de-usuario.github.io/nome-do-seu-repositorio/ )**
+**[Clique aqui para acessar o aplicativo!] https://alexialuzdeferro.github.io/Quizz--Pombagiras-/
 
 ---
 
