@@ -3,7 +3,7 @@
 ![Descrição da imagem](https://raw.githubusercontent.com/alexialuzdeferro/Quizz--Pombagiras-/refs/heads/main/assets/undefined_An_Artgerm-style_hyp.png )
 
 
-# 💃 "Descubra qual e sua Pombagira."
+## 💃 "Descubra qual e sua Pombagira."
 
 
 
@@ -29,18 +29,16 @@ https://alexialuzdeferro.github.io/Quizz--Pombagiras-/
 
 ---
 
-# 👩‍💻 Desenvolvido por
+## 👩‍💻 Desenvolvido por
 
 # Alexia Tsan
 
 ---
 
 **TikTok:** 
-
 https://www.tiktok.com/@almasdepombagira?_t=ZM-8z36g5TDUcI&_r=1
 
-**Instagram:** [@seu-usuario-github]
-
-(https://www.instagram.com/almasdepombagira?igsh=Y3VocnA2aDQxYjlw )
+**Instagram:** 
+https://www.instagram.com/almasdepombagira?igsh=Y3VocnA2aDQxYjlw
 
 *Feito com Axé e Tecnologia! 🌹*
