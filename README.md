@@ -15,11 +15,11 @@ Este projeto é bem simples, respondendo algumas perguntas específicas sobre o 
 *   CSS3
 *   JavaScript
 
-## ✨ Funcionalidades
+# ✨ Funcionalidades
 
-*   **Funcionalidade 1:** [Descreva a primeira coisa que seu app faz].
-*   **Funcionalidade 2:** [Descreva a segunda coisa que seu app faz].
-*   **Funcionalidade 3:** [Descreva a terceira, se houver].
+*   **Funcionalidade 1:** Você responde 12 perguntas de multiplas escolhas.
+*   **Funcionalidade 2:** Não importando o número de acertos ao final você tem acesso a um botão.
+*   **Funcionalidade 3:** Ao clicar no botão será revelado para ti sua moça,  sua Pombagira que ti acompanha.
 
 ## 🚀 Como Acessar
 
