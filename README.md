@@ -1,4 +1,4 @@
-# [Oráculo Sagrado das Pombagiras]
+# Oráculo Sagrado das Pombagiras
 
 ![Imagem de Capa do App](https://link-para-uma-imagem-sua.com/imagem.png )
 
