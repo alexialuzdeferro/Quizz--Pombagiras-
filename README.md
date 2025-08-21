@@ -21,7 +21,7 @@ Este projeto é bem simples, respondendo algumas perguntas específicas sobre o 
 *   **Funcionalidade 2:** Não importando o número de acertos ao final você tem acesso a um botão.
 *   **Funcionalidade 3:** Ao clicar no botão será revelado para ti sua moça,  sua Pombagira que ti acompanha.
 
-## 🚀 Como Acessar
+# 🚀 Como Acessar
 
 Você pode ver o aplicativo funcionando ao vivo clicando no link abaixo:
 
@@ -29,9 +29,9 @@ https://alexialuzdeferro.github.io/Quizz--Pombagiras-/
 
 ---
 
-## 👩‍💻 Desenvolvido por
+# 👩‍💻 Desenvolvido por
 
-**Alexia Tsan**
+*Alexia Tsan*
 
 **TikTok:** 
 https://www.tiktok.com/@almasdepombagira?_t=ZM-8z36g5TDUcI&_r=1
