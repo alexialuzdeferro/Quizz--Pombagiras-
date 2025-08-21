@@ -7,9 +7,9 @@
 
 
 
-📖 Sobre o Projeto
+# 📖 Sobre o Projeto
 
-Este projeto é [descreva aqui o objetivo do seu aplicativo com um pouco mais de detalhe. Foi um exercício de aprendizado? É uma ferramenta para algo? Uma homenagem?]. Ele foi desenvolvido com muito carinho e dedicação, utilizando as seguintes tecnologias:
+Este projeto é [bem simples, respondendo algumas perguntas específicas sobre o assunto você consegue conhecer quem é sua Pombagira. Foi e ainda está sendo um exercício de aprendizado? É uma ferramenta ainda em desenvolvimento e sóa pontinhado iceberg. Sim, e uma homenagem as minhas mães espirituais]. Ele foi desenvolvido com muito carinho e dedicação, utilizando as seguintes tecnologias:
 
 *   HTML5
 *   CSS3
